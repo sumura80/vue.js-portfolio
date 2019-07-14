@@ -1,0 +1,528 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" rel="stylesheet">
+    <link rel="shortcut icon" href="favicon.ico">
+    <!-- <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+    <script src="https://unpkg.com/vue@2.4.2"></script> -->
+
+    <title>VueJSポートフォリオ</title>
+  </head>
+<body>
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark ">
+    <a class="navbar-brand" href="index.html">Vue.jsポートフォリオ</a>
+  </nav>
+     
+
+<div class="wholewrap">
+  <div class="wrap1">
+    <div class="jumbotron" style="border-radius: 0px;">
+      <div class="container">
+        <h1>Vue.jsポートフォリオ</h1>
+        <h4>Vue.jsを使用したサイト</h4> 
+      </div>
+    </div>
+  </div><!-- end of wrap1 -->
+
+  
+<div id="app">
+      
+<div class="wrap2">
+  <div class="container">
+    <div class="question-title">
+      <h3>1. 本日(<span>{{Month}}月{{Days}}日</span>)のTODOリスト</h3>
+    </div>
+
+      <div class="question-section">
+        <div class="row">
+          <div class="col-sm-4 mt-4 taskItem" v-for="(todo,index) in todolist" v-model="todo.isListed" v-on:click="deleteItem(index)" data-toggle="tooltip" title="クリックすると削除できます"><span v-bind:class="{todowrap: todo.isListed}">{{todo.task}}</span></div>          
+        </div><!-- end of row -->
+
+        
+        <form action="todo" v-on:submit.prevent>
+          <div class="form-group">
+           <input type="text" class="form-control mt-4" v-model="todotask" style="width:350px;" placeholder="本日のタスクを入力">
+          </div>
+          <button class="btn btn-warning" v-on:click="addItem">追加</button>
+          <br><label class="mt-1">※削除するにはタスクをクリックしてください</label>
+        </form>
+
+      </div><!-- end of question-section -->
+
+  </div><!-- end of container -->
+</div><!--end of wrap2 -->
+
+
+<div class="wrap3">
+  <div class="container">
+    <div class="question-title">
+      <h3>2. 卵をノックしてください</h3>
+    </div>
+
+    <div class="question-section" style="background-image: url(hiyokoback.png);background-repeat: center; ">
+        <div id="egg" v-bind:class="{hatched: cracked}"></div>
+
+        <div id="egg-hardness">
+          <div v-bind:style="{width: hardness + '%'}"></div>
+        </div>
+
+        <div id="controls">
+          <div id="voice" v-show="cracked" style="width:300px;" class=
+          "mb-2">ピヨピヨ！見事ヒナがかえりました。</div>
+          <button class="btn btn-primary mr-2" v-on:click="knock" v-show="!cracked">ノックする</button>
+          <button class="btn btn-secondary" v-on:click="restart">再スタート</button>
+        </div>
+        
+   
+
+      </div><!-- end of question-section -->
+  </div><!-- end of container -->
+</div><!--end of wrap3 -->
+
+
+<div class="wrap4">
+  <div class="container">
+    <div class="question-title">
+      <h3>3. アンケート</h3>
+    </div>
+
+      <div class="question-section">
+        <div class="row">
+          <div class="col-sm-6"><!-- img -->
+            <img src="programming.png" alt="inquiery-image" class="img-fluid ">
+          </div>
+          <div class="col-sm-6"><!-- img -->
+            <img src="vue.png" alt="inquiery-image" class="img-fluid ">
+          </div>
+
+
+
+          <div class="col-sm-12 mt-3"><!--アンケート-->
+            <div class='form-group'>
+              <label class='col-sm-12 control-label'>Vue.jsに関するアンケートを30文字でご記入お願いします。</label>
+              <div class='col-sm-12'>
+                <textarea class='form-control' v-model.trim='inquiry' placeholder="コメントを記入してください"></textarea>
+                <h5 class="text-right pr-3 pt-1"><span v-bind:class="{redword: less10}">{{ commentWords }}</span>文字</h5>
+              </div>
+            </div>
+             
+          </div>
+
+ 
+          <div class="col-sm-12"><!-- もっと見る-->
+          <p class="pl-2">最近のトレンドとして、Angular/ React/ Vue/jsの3つのフレームワークが人気です。ここではVue.jsについてまとめてみました。<br>HTMLに直接組み込めるという点が始めやすい点だと思います。コンパイルも必要なくHTMLとJSファイルがあればすぐに動く点も人気のある理由でしょう。また学習コストも低く、初学者には向いているフレームワークと言えます。<span class="btn btn-link" v-on:click="more = !more">{{displayBar}}</span>
+          </p>
+            
+            <p class="container" v-show="more"> 
+             短所となりうる点にも記述しておきましょう。FacebookがサポートしているReactに比べるとライブラリや開発の規模が小さいかもしれません。jQueryを触ったことがある方には、簡単かもしれませんがDOMの概念が必要になってきます。<br>
+             上記に使いやすさと短所になりうる点を列挙してみました。みなさんは、どんなJSのフレームワークを使われたことがあるでしょうか。
+            </p>
+          </div> 
+           <div class="col-sm-3 offset-sm-2 mt-4"><!-- 投票-->
+            <div v-show="!voted">投票ボタン</div>
+             <div v-show="voted">投票しました。</div>
+             <button class="btn" v-on:click="active"><i class="far fa-thumbs-up" v-bind:class="{votered: isActive}"></i></button>
+            
+          </div>        
+          <div class="col-sm-5 mt-4"><!-- 参考-->
+            <div class="review">
+              <p v-show="!answered">参考になりましたか？</p>
+              <p v-show="answered">ご回答ありがとうございました。</p>
+              <button class="btn btn-info" v-on:click="answer" v-show="!answered">Yes</button>
+              <button class="btn btn-danger" v-on:click="answer" v-show="!answered">No</button>
+            </div>          
+          </div> 
+
+          <div class="col-sm-12 mt-4"><!-- ボタン-->
+            <p class="my-4" v-show="doneinquiry" style="text-align: center;">アンケートを送信いたしました。ありがとうございました。</p>
+            <button class="btn btn-warning btn-block mx-auto my-4" style="width:400px;" v-on:click="sentinquiry" v-show="!doneinquiry">送信</button> 
+          </div>
+      </div><!-- end of row -->
+
+        
+         
+
+      </div><!-- end of question-section -->
+  </div><!-- end of container -->
+</div><!--end of wrap4 -->
+
+
+
+  <div class="wrap5">
+  <div class="container">
+    <div class="question-title">
+      <h3>4. 旅行請求書</h3>
+    </div>
+
+<div class="question-section">
+    <form class="form-wrap container">
+      <div class="head-title">旅行の手段を選択してください。</div>   <br>
+      <div class="row">
+        <div class="col-sm-12">
+          <div class="form-check form-check-inline">
+            <input v-model="choice" class="form-check-input" type="radio" name="radioOption" id="train" value="section1">
+            <label for="train" class="form-check-label">電車</label>
+          </div>
+
+          <div class="form-check form-check-inline">
+            <input v-model="choice" class="form-check-input" type="radio" name="radioOption" id="airplane" value="section2">
+            <label for="airplane" class="form-check-label">飛行機</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input v-model="choice" class="form-check-input" type="radio" name="radioOption" id="car" value="section3">
+            <label for="car" class="form-check-label">車</label>
+          </div>
+        </div><!-- end of  col-sm-12-->
+      </div><!-- end of row -->
+
+
+
+
+    <!-- ***********    train start ************* -->
+      <div class="eachdisplay mt-4">
+        <div class="trainbox" v-if="choice == 'section1' ">
+           <div class="row my-4">
+             <label class="col-sm-3 col-form-label">期間を選択してください</label>
+              <div class="col-sm-4">
+                <input class="form-control" type="date" placeholder="期間"/>
+              </div>~
+
+              <div class="col-sm-4">
+                <input class="form-control" type="date" placeholder="期間"/>
+              </div>
+            </div>
+     
+
+
+          <div class="form-group row">
+            <label for="trainhotelfee" class="col-sm-3 col-form-label">ホテル料金<br>(8,900円)</label>
+
+            <div class="col-sm-7">
+              <input type="number" class="form-control" id="trainhotelfee" v-model:value="trainhoteltimes" v-on:click="trainstay" min="0">
+          </div>
+          
+          <div class="col-sm-1">
+            <label for="trainhotelfee">泊</label>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="trainfoodfee" class="col-sm-3 col-form-label">お料理の回数<br>
+              (1,890円)
+            </label>
+
+            <div class="col-sm-7">
+              <input type="number" class="form-control" id="trainfoodfee"  v-on:click="trainstay" v-model:value="trainfoodtimes" min="0">
+          </div>
+          
+          <div class="col-sm-1">
+            <label for="trainfoodfee">食</label>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="trainfee" class="col-sm-3 col-form-label">電車料金</label>
+
+            <div class="col-sm-7">
+              <input class="form-control" type="text" placeholder="4,900" id="trainfee" readonly>
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="trainfee">円</label>
+          </div>
+        </div>
+        <hr>
+          <div class="form-group row">
+            <label for="subtotal" class="col-sm-3 col-form-label">小計</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="subtotal" readonly v-model:text="trainstay()">
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="subtotal">円</label>
+          </div>
+        </div>
+          <div class="form-group row">
+            <label for="tax" class="col-sm-3 col-form-label">税金(8%)</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="number" id="tax" v-model.number="(trainstay() * 0.08).toFixed(0)" readonly>
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="tax">円</label>
+          </div>
+        </div>
+        <div class="form-group row">
+        <label for="total" class="col-sm-3 col-form-label">合計</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="number" id="total" readonly v-model.number="(trainstay()*1.08).toFixed(0)">
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="total">円</label>
+          </div>
+        </div>
+      </div><!-- end of train box-->
+
+
+
+
+      <!-- ***********    airplane start ************* -->
+      <div class="airplanebox" v-if="choice == 'section2' ">
+
+        <div class="row my-4">
+             <label class="col-sm-3 col-form-label">期間を選択してください</label>
+              <div class="col-sm-4">
+                <input class="form-control" type="date" placeholder="期間"/>
+              </div>~
+
+              <div class="col-sm-4">
+                <input class="form-control" type="date" placeholder="期間"/>
+              </div>
+            </div>
+
+
+
+          <div class="form-group row">
+            <label for="planehotelfee" class="col-sm-3 col-form-label">ホテル料金<br>(16,200円)</label>
+
+            <div class="col-sm-7">
+              <input type="number" class="form-control" id="planehotelfee" min="0" v-on:click="planestay" v-model:value="planehoteltimes"> 
+          </div>
+          
+          <div class="col-sm-1">
+            <label for="planehoteltimes">泊</label>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="planefoodfee" class="col-sm-3 col-form-label">お料理の回数<br>
+              (4,320円)
+            </label>
+
+            <div class="col-sm-7">
+              <input type="number" class="form-control" id="planehotelfee" min="0" v-model:value="planefoodtimes" v-on:click="planestay">
+          </div>
+          <div class="col-sm-1">
+            <label for="planefoodtimes">食</label>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="plane" class="col-sm-3 col-form-label">航空料金</label>
+
+            <div class="col-sm-7">
+              <input class="form-control" type="text" placeholder=" 38,840" id="plane" readonly>
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="plane">円</label>
+          </div>
+        </div>
+        <hr>
+          <div class="form-group row">
+            <label for="subtotal" class="col-sm-3 col-form-label">小計</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="subtotal" v-model:text="planestay()" readonly>
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="subtotal">円</label>
+          </div>
+        </div>
+          <div class="form-group row">
+            <label for="tax" class="col-sm-3 col-form-label">税金(8%)</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="tax" v-model.number="(planestay() * 0.08).toFixed(0)" readonly>
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="tax">円</label>
+          </div>
+        </div>
+        <div class="form-group row">
+        <label for="total" class="col-sm-3 col-form-label">合計</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="total" v-model.number="(planestay()*1.08).toFixed(0)" readonly>
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="total">円</label>
+          </div>
+        </div>
+      </div><!-- end of airplane box-->
+
+
+
+
+
+      <!-- ***********    car start ************* -->
+      <div class="carebox" v-if="choice == 'section3' ">
+
+          <div class="row my-4">
+             <label class="col-sm-3 col-form-label">期間を選択してください</label>
+              <div class="col-sm-4">
+                <input class="form-control" type="date" placeholder="期間"/>
+              </div>~
+
+              <div class="col-sm-4">
+                <input class="form-control" type="date" placeholder="期間"/>
+              </div>
+            </div>
+
+
+          <div class="form-group row">
+            <label for="carhotelfee" class="col-sm-3 col-form-label">ホテル料金<br>(6,700円)</label>
+
+            <div class="col-sm-7">
+              <input type="number" class="form-control" id="carhotelfee" min="0" v-model:value="carhoteltimes" v-on:click="carstay">
+          </div>
+          <div class="col-sm-1">
+            <label for="hotelfee">泊</label>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="carfoodtimes" class="col-sm-3 col-form-label">お料理の回数<br>
+              (2,870円)
+            </label>
+
+            <div class="col-sm-7">
+              <input type="number" class="form-control" id="carfoodtimes" min="0" v-model:value="carfoodtimes" v-on:click="carstay">
+          </div>
+          <div class="col-sm-1">
+            <label for="carfoodtimes">食</label>
+          </div>
+        </div>
+        <div class="form-group row">
+            <label for="car" class="col-sm-3 col-form-label">駐車料金</label>
+
+            <div class="col-sm-7">
+              <input class="form-control" type="text" placeholder=" 1,490" id="car" readonly>
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="train">円</label>
+          </div>
+        </div>
+        <hr>
+          <div class="form-group row">
+            <label for="subtotal" class="col-sm-3 col-form-label">小計</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="subtotal" readonly v-model:text="carstay()" 
+              >
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="subtotal">円</label>
+          </div>
+        </div>
+          <div class="form-group row">
+            <label for="cartax" class="col-sm-3 col-form-label">税金(8%)</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="cartax" readonly v-model.number="(carstay() * 0.08).toFixed(0)">
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="cartax">円</label>
+          </div>
+        </div>
+        <div class="form-group row">
+        <label for="cartotal" class="col-sm-3 col-form-label">合計</label>
+
+            <div class="col-sm-4">
+              <input class="form-control" type="text" id="cartotal" readonly v-model.number="(carstay() * 1.08).toFixed(0)">
+              
+          </div>
+          <div class="col-sm-1">
+            <label for="total">円</label>
+          </div>
+        </div>
+      </div><!-- end of car box-->
+    </div><!-- end of eachdisplay -->
+    </form><!-- end of form-horizontal -->
+
+    <div class="datasent">
+      <p v-show="traveldatasent" style="text-align: center; margin-top: 60px;">データが送信されました。</p>
+     
+       <button class="btn btn-primary btn-block mx-auto" style="width:300px; margin: 60px 0;" v-on:click="confirm" v-show="!traveldatasent">データ送信</button> 
+    </div>
+ 
+
+    </div><!-- end of question-section -->
+  </div><!-- end of container -->
+</div><!--end of wrap5 -->
+
+
+
+
+
+
+
+
+
+  </div><!-- end of app -->
+
+  <!-- Footer -->
+       <footer div class="footer ">
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12 col-md-12">
+                     <ul class="list-inline quicklinks">
+                        <li class="list-inline-item"><a href="index.html">Top</a></li>
+                           
+                    </ul>
+                </div>
+                <div class="col-sm-12 col-md-12">
+                    <ul class="list-inline social-buttons">
+                        <li class="list-inline-item"><a href="https://www.facebook.com/"><i class="fab fa-facebook fa-3x social-icons" ></i></a>
+                        </li>
+
+                        <li class="list-inline-item"><a href="https://twitter.com/"><i class="fab fa-twitter-square fa-3x social-icons"></i></a>
+                        </li>
+    
+                        <li class="list-inline-item"><a href="https://www.youtube.com/"><i class="fab fa-youtube-square fa-3x social-icons"></i></a>
+                        </li>
+
+                        <li class="list-inline-item"><a href="https://www.instagram.com/"><i class="fab fa-instagram fa-3x social-icons"></i></a>
+                        </li>
+                        
+                    </ul>
+                </div>
+
+                <div class="col-sm-12 col-md-12">
+                <span class="copyright"><small>Copyright &copy; 2019 Vue View Inc. All Rights Reserved.</small></span>
+                   
+                </div>
+            </div>
+        </div>
+    </footer><!-- End Footer -->
+</div><!-- end of  wholewrap -->
+
+
+
+<script src="script.js"></script>
+<script>
+$(function(){
+ $('[data-toggle="tooltip"]').tooltip();
+ });
+</script>
+    <!-- Optional JavaScript -->
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+  
+  </body>
+</html>
