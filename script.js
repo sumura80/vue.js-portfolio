@@ -35,7 +35,8 @@ new Vue({
 	 carhoteltimes:'',
 	 carfoodfee:2870,
 	 carfoodtimes:'',
-	 traveldatasent:false
+	 traveldatasent:false,
+	 submitAgree:false
 
 	},
 	methods:{

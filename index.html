@@ -454,9 +454,11 @@
     </form><!-- end of form-horizontal -->
 
     <div class="datasent">
-      <p v-show="traveldatasent" style="text-align: center; margin-top: 60px;">データが送信されました。</p>
-     
-       <button class="btn btn-primary btn-block mx-auto" style="width:300px; margin: 60px 0;" v-on:click="confirm" v-show="!traveldatasent">データ送信</button> 
+      
+      <p v-show="traveldatasent" style="text-align: center; margin-top: 100px; font-size: 1.2em;"><i class="far fa-check-circle" style="font-size: 1.2em; color:#31BFAD; margin-bottom: 60px;"></i> データが送信されました。</p>
+      <p style="text-align: center; margin-top: 60px; margin-bottom: -30px;" v-show="!traveldatasent">
+      <label for="priceConfirm"><input type="checkbox" v-model="submitAgree" id="priceConfirm"  > 金額を確認しました</label>  </p>
+       <button class="btn btn-primary btn-block mx-auto" style="width:300px; margin: 60px 0;" v-on:click="confirm" v-show="!traveldatasent" v-bind:disabled="submitAgree == false">データ送信</button> 
     </div>
  
 
