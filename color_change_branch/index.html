@@ -156,7 +156,7 @@
 
 
 
- <div class="wrap5">
+  <div class="wrap5">
   <div class="container">
     <div class="question-title">
       <h3>4. 旅行請求書</h3>
@@ -460,37 +460,11 @@
       <label for="priceConfirm"><input type="checkbox" v-model="submitAgree" id="priceConfirm"  > 金額を確認しました</label>  </p>
        <button class="btn btn-primary btn-block mx-auto" style="width:300px; margin: 60px 0;" v-on:click="confirm" v-show="!traveldatasent" v-bind:disabled="submitAgree == false">データ送信</button> 
     </div>
+ 
 
     </div><!-- end of question-section -->
   </div><!-- end of container -->
 </div><!--end of wrap5 -->
-
-
-<div class="wrap6">
-  <div class="container">
-    <div class="question-title">
-      <h3>5. マカロン販売　EC-Site</h3>
-    </div>
-
-      <div class="question-section">
-        <div class="CartBox">
-           <i class="fas fa-shopping-cart mr-2"></i>{{cart.length}}
-          </div>
-          <my-product v-on:increase-cart="increaseCart"></my-product>
-          <div class="container cart-box">
-            <h5>下記の商品をカートに入れました。</h5>
-            <div class="row">
-              <div class="col-sm-2 mt-4 makaronItem"  v-for="makaronitem in cart" v-on:click="deleteMakaron(index)"><span>{{ makaronitem }}</span></div>          
-            </div><!-- end of row -->
-             
-             
-            
-        </div>
-        
-
-     </div><!-- end of question-section -->
-  </div><!-- end of container -->
-</div><!--end of wrap6 -->
 
 
 
