@@ -13,7 +13,7 @@
 2. クリックで画像を変更(v-on:submit.prevent, v-model, v-on:click, v-show,ある程度まで行くと画像が変わる機能)
 3. アンケート(v-model.trim, v-bind:class, v-on:click, v-show, 投票ボタンやコメント数カウント機能)
 4. 旅行請求書(v-model, v-if, v-on:click, v-model:value, v-model:text, v-model:number, v-show, v-bind:disabled, 料金金額機能を実装)
-
+5. EC-Cart(Component, $emitで子から親へのデータ送信,v-bind:key, v-for, v-on:click, v-bind:class)
 ```
 　　
 
